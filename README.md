@@ -7,11 +7,9 @@ This GitBook plugin allows content to be grouped by using tabs. It's based on Tw
 
 {% tab title="tab1_title" %}
 Content for first tab ...
-{% endtab %}
 
 {% tab title="tab2_title" %}
 Content for second tab ...
-{% endtab %}
 
 {% endtabs %}
 ```

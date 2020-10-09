@@ -2,7 +2,7 @@
     "name": "gitbook-plugin-tabs",
     "description": "tabs plugin for GitBook",
     "main": "index.js",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "author": {
         "name": "Logan Shen",
         "email": "ifengkou@hotmail.com",
