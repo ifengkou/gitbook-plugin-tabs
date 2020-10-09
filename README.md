@@ -1,40 +1,21 @@
-GitBook Sample Plugin
-==============
+This GitBook plugin allows content to be grouped by using tabs. It's based on Twitter Bootstrap v3.
 
-This is a model for GitBook plugins.
-
-## How GitBook plugin works?
-
-A plugin for GitBook is a node package that can be published on [NPM](http://www.npmjs.org). It has to follow the name convention: `gitbook-plugin-*name*`.
-
-### package.json
-
-#### name
-
-The package name should begin with ```gitbook-plugin-```.
-
-Examples: `gitbook-plugin-mixpanel`, `gitbook-plugin-googleanalytics`.
-
-#### engine
-
-The package.json should contain a `engine` field using [the standard norm](https://www.npmjs.org/doc/json.html#engines).
+## Example
 
 ```
-"engines": {
-    "gitbook": "*"
-}
+{% tabs %}
+
+{% tab title="tab1_title" %}
+Content for first tab ...
+{% endtab %}
+
+{% tab title="tab2_title" %}
+Content for second tab ...
+{% endtab %}
+
+{% endtabs %}
 ```
 
-For example if you want your plugin to supports only GitBook version supperior to 0.3.1:
+## Changelog
 
-```
-"engines": {
-    "gitbook": ">=0.3.1"
-}
-```
-
-### entry point
-
-The plugin entry point should return an object with some metadata.
-
-
+* **0.1.0:** Initial release

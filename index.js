@@ -1,60 +1,93 @@
+var _ = require('lodash');
+var markdown = require('gitbook-markdown');
+
 module.exports = {
     // Extend website resources and html
     website: {
-        assets: "./book",
-        js: [
-            "test.js"
-        ],
-        css: [
-            "test.css"
-        ],
-        html: {
-            "html:start": function() {
-                return "<!-- Start book "+this.options.title+" -->"
-            },
-            "html:end": function() {
-                return "<!-- End of book "+this.options.title+" -->"
-            },
-
-            "head:start": "<!-- head:start -->",
-            "head:end": "<!-- head:end -->",
-
-            "body:start": "<!-- body:start -->",
-            "body:end": "<!-- body:end -->"
-        }
-    },
-
-    // Extend ebook resources and html
-    website: {
-        assets: "./book",
-        js: [
-            "test.js"
-        ],
-        css: [
-            "test.css"
-        ],
-        html: {
-            "html:start": function() {
-                return "<!-- Start book "+this.options.title+" -->"
-            },
-            "html:end": function() {
-                return "<!-- End of book "+this.options.title+" -->"
-            },
-
-            "head:start": "<!-- head:start -->",
-            "head:end": "<!-- head:end -->",
-
-            "body:start": "<!-- body:start -->",
-            "body:end": "<!-- body:end -->"
+        website: {
+            assets: "./assets",
+            js: [
+                "https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js",
+                "tabs.js"
+            ],
+            css: [
+                "https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css",
+                "tabs.css"
+            ]
         }
     },
 
     // Extend templating blocks
     blocks: {
         // Author will be able to write "{% myTag %}World{% endMyTag %}"
-        myTag: {
-            process: function(blk) {
-                return "Hello "+blk.body;
+        // myTag: {
+        //     process: function(blk) {
+        //         return "Hello "+blk.body;
+        //     }
+        // }
+
+        
+        // {% tabs first="First Tab", second="Second Tab", third="Third Tab" %}
+
+        // {% content "first" %}
+        // Content for first tab ...
+
+        // {% content "second" %}
+        // Content for second tab ...
+
+        // {% content "third" %}
+        // Content for third tab ...
+
+        // {% endtabs %}
+
+        //```
+        // {% tabs %}
+
+        // {% tab title="tab1_title" %}
+        // Content for first tab ...
+        // {% endtab %}
+
+        // {% tab title="tab2_title" %}
+        // Content for second tab ...
+        // {% endtab %}
+
+        // {% endtabs %}
+        // ```
+        tabs: {
+            tab: {
+                process: function (block) {
+                    var book = this.book;
+                    // <ul class="nav nav-tabs">
+                    //     <li role="presentation" class="active"><a href="#">Home</a></li>
+                    //     <li role="presentation"><a href="#">Profile</a></li>
+                    //     <li role="presentation"><a href="#">Messages</a></li>
+                    // </ul>
+                    var tabList = "<ul class='nav nav-tabs' role='tablist'>";
+                    var classData = "active";
+
+                    var tabContent="<div class='tab-content'>";
+                    var activeState = 'active';
+
+                    var tabIndex = 1 + _.random(1000);
+                    _.forEach(block.blocks, function(b){
+                        title = "tab-"+tabIndex;
+                        var tabId = "tab-"+tabIndex;
+                        if(b.kwargs && b.kwargs.title){
+                            title = b.kwargs.title
+                        }
+                        tabList += `<li role="presentation" class="${classData}"><a href="#${tabId}" aria-controls="${tabId}" role="tab" data-toggle="tab">${title}</a></li>`;
+                        classData = "";
+
+                        var markup = markdown.page(b.body).content;
+                        tabContent += `<div role="tabpanel" class="tab-pane ${activeState}" id="${tabId}">${markup}</div>`;
+                        activeState = "";
+
+                        tabIndex++;
+                    })
+                    tabList += "</ul>";
+                    tabContent += "</div>";
+                    return tabList + tabContent;
+                }
             }
         }
     },
@@ -62,9 +95,9 @@ module.exports = {
     // Extend templating filters
     filters: {
         // Author will be able to write "{{ 'test'|myFilter }}"
-        myFilter: function(s) {
-            return "Hello "+s;
-        }
+        // myFilter: function(s) {
+        //     return "Hello "+s;
+        // }
     },
 
     // Hook process during build
@@ -73,12 +106,12 @@ module.exports = {
 
         // This is called before the book is generated
         "init": function() {
-            console.log("init!");
+            console.log("gitbook plugin tabs init!");
         },
 
         // This is called after the book generation
         "finish": function() {
-            console.log("finish!");
+            console.log("gitbook plugin tabs finish!");
         }
     }
 };
