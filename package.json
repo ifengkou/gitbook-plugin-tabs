@@ -1,18 +1,32 @@
 {
-    "name": "gitbook-plugin",
-    "description": "Sample plugin for GitBook",
+    "name": "gitbook-plugin-tabs",
+    "description": "tabs plugin for GitBook",
     "main": "index.js",
-    "version": "0.0.2",
-    "engines": {
-        "gitbook": "*"
+    "version": "0.1.1",
+    "author": {
+        "name": "Logan Shen",
+        "email": "ifengkou@hotmail.com",
+        "url": "http://github.com/ifengkou"
     },
-    "homepage": "https://github.com/GitbookIO/plugin",
+    "homepage": "https://github.com/ifengkou/gitbook-plugin-tabs",
     "repository": {
         "type": "git",
-        "url": "https://github.com/GitbookIO/plugin.git"
+        "url": "https://github.com/ifengkou/gitbook-plugin-tabs.git"
     },
     "license": "Apache 2",
     "bugs": {
-        "url": "https://github.com/GitbookIO/plugin/issues"
+        "url": "https://github.com/ifengkou/gitbook-plugin-tabs/issues"
+    },
+    "engines": {
+        "gitbook": ">2.x.x"
+    },
+    "keywords": [
+        "gitbook",
+        "interactive",
+        "tabs"
+    ],
+    "dependencies": {
+        "gitbook-markdown": "^2.0.1",
+        "lodash": "^4.17.4"
     }
 }
