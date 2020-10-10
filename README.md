@@ -18,4 +18,5 @@ Content for second tab ...
 
 ## Changelog
 
+* **0.1.2:** fix tabs style
 * **0.1.2:** Initial release
