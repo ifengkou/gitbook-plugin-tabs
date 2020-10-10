@@ -2,7 +2,6 @@ var _ = require('lodash');
 var markdown = require('gitbook-markdown');
 
 module.exports = {
-    // Extend website resources and html
     website: {
         assets: "./assets",
         js: [
@@ -14,8 +13,6 @@ module.exports = {
             "tabs.css"
         ]
     },
-
-    // Extend templating blocks
     blocks: {
         tabs: {
             blocks: ['tab','endtab'],
@@ -44,14 +41,8 @@ module.exports = {
                 })
                 tabList += "</ul>";
                 tabContent += "</div>";
-                return tabList + tabContent;
+                return "<div class='markdown-tabs'>"+tabList + tabContent+"</div>";
             }
         }
-    },
-
-    // Extend templating filters
-    filters: {},
-
-    // Hook process during build
-    hooks: {}
+    }
 };
